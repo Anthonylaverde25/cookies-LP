@@ -1,3 +1,8 @@
+"use client";
+
+import ContactForm from "./ContactForm";
+
+
 export default function Contact() {
   return (
     <div className="px-4 py-16">
@@ -13,51 +18,7 @@ export default function Contact() {
       </div>
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-text-light dark:text-text-dark"
-              htmlFor="name"
-            >
-              Nombre
-            </label>
-            <input
-              className="rounded-lg border border-border-light dark:border-border-dark bg-transparent px-4 py-2 text-text-light dark:text-text-dark focus:border-primary focus:ring-primary/50 placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark"
-              id="name"
-              placeholder="Tu Nombre"
-              type="text"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-text-light dark:text-text-dark"
-              htmlFor="email"
-            >
-              Correo Electrónico
-            </label>
-            <input
-              className="rounded-lg border border-border-light dark:border-border-dark bg-transparent px-4 py-2 text-text-light dark:text-text-dark focus:border-primary focus:ring-primary/50 placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark"
-              id="email"
-              placeholder="Tu Correo Electrónico"
-              type="email"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-text-light dark:text-text-dark"
-              htmlFor="message"
-            >
-              Mensaje
-            </label>
-            <textarea
-              className="rounded-lg border border-border-light dark:border-border-dark bg-transparent px-4 py-2 text-text-light dark:text-text-dark focus:border-primary focus:ring-primary/50 placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark"
-              id="message"
-              placeholder="Tu Mensaje"
-              rows={5}
-            ></textarea>
-          </div>
-          <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] w-full">
-            <span className="truncate">Enviar Mensaje</span>
-          </button>
+          <ContactForm />
         </div>
         <div className="flex flex-col gap-8">
           <div className="flex items-start gap-4">
