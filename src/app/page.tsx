@@ -16,7 +16,7 @@ export default function Home() {
         
         {/* Hero - Full viewport width */}
         <div className="pt-16">
-          <div id="home">
+          <div className="w-full" id="home">
             <Hero />
           </div>
         </div>
