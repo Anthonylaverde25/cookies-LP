@@ -24,4 +24,12 @@
     .text-balance {
         text-wrap: balance;
     }
+    
+    .nav-link {
+        color: #1b1b1b;
+    }
+    
+    .nav-link:hover {
+        color: var(--color-primary);
+    }
 }

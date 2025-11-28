@@ -39,36 +39,32 @@ export default function Header() {
             ></path>
           </svg>
         </div>
-        <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]" style={{ color: '#1b1b1b' }}>
+        <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] nav-link">
           Artisan Bakes
         </h2>
       </div>
       <div className="hidden md:flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
           <Link
-            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-            style={{ color: '#1b1b1b' }}
+            className="text-sm font-medium leading-normal nav-link transition-colors"
             href="#home"
           >
             Inicio
           </Link>
           <Link
-            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-            style={{ color: '#1b1b1b' }}
+            className="text-sm font-medium leading-normal nav-link transition-colors"
             href="#products"
           >
             Productos
           </Link>
           <Link
-            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-            style={{ color: '#1b1b1b' }}
+            className="text-sm font-medium leading-normal nav-link transition-colors"
             href="#about"
           >
             Sobre Nosotros
           </Link>
           <Link
-            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-            style={{ color: '#1b1b1b' }}
+            className="text-sm font-medium leading-normal nav-link transition-colors"
             href="#contact"
           >
             Contacto
@@ -80,7 +76,7 @@ export default function Header() {
       </div>
       <div className="md:hidden">
         <button
-          style={{ color: '#1b1b1b' }}
+          className="nav-link"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <span className="material-symbols-outlined">menu</span>
