@@ -15,8 +15,8 @@ export default function Home() {
         <Header />
         
         {/* Hero - Full viewport width */}
-        <div className="pt-16">
-          <div className="w-full" id="home">
+        <div className="pt-16" id="home">
+          <div className="w-full">
             <Hero />
           </div>
         </div>
@@ -25,14 +25,14 @@ export default function Home() {
         <div className="flex flex-1 justify-center pb-8 sm:px-4 md:px-10 lg:px-20 xl:px-40">
           <div className="layout-content-container flex flex-col max-w-7xl flex-1">
             <main>
-              <div id="products">
+              <div id="products" className="scroll-mt-16">
                 <ProductGrid />
               </div>
-              <div id="about">
+              <div id="about" className="scroll-mt-16">
                 <Story />
                 <Testimonials />
               </div>
-              <div id="contact">
+              <div id="contact" className="scroll-mt-16">
                 <Contact />
               </div>
               <FAQ />

@@ -1,14 +1,18 @@
 export default function Hero() {
   return (
     <section className="w-full py-10 md:py-16">
-      <div
-        className="relative flex min-h-[520px] flex-col bg-cover bg-center bg-no-repeat overflow-hidden shadow-lg backdrop-blur-sm"
-        style={{
-          backgroundImage:
-            'linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.75) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDW7wg_JrIjaLfxFLMTQbv_ofH1IXb0ex6HR61A5Y9f8F9-qp7qE0B3Z9AgO4QJHcefBP2ZkA1T5Zjhf0ojkdXDuxyg_fuB5B0O9k_ybMNUeQIztmUUZ-G4g8S7cMgueRJf06yQz8qPkxWStEKXBfGTnV3rol4i2TXJICmfM_99nY6aw8oLt0h9a9iNwxjyiNaZX2_KoROqN308Olcyd681zaNhXH7JexyLYykdP7vyZNC_3leWqvJREYWMrRNkCOTxMaEsPZ0_rS0")',
-        }}
-      >
-        {/* Contenedor centrado para el contenido */}
+      <div className="relative flex min-h-[520px] flex-col overflow-hidden shadow-lg">
+        {/* Capa de imagen de fondo con blur */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              'linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.75) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDW7wg_JrIjaLfxFLMTQbv_ofH1IXb0ex6HR61A5Y9f8F9-qp7qE0B3Z9AgO4QJHcefBP2ZkA1T5Zjhf0ojkdXDuxyg_fuB5B0O9k_ybMNUeQIztmUUZ-G4g8S7cMgueRJf06yQz8qPkxWStEKXBfGTnV3rol4i2TXJICmfM_99nY6aw8oLt0h9a9iNwxjyiNaZX2_KoROqN308Olcyd681zaNhXH7JexyLYykdP7vyZNC_3leWqvJREYWMrRNkCOTxMaEsPZ0_rS0")',
+            filter: 'blur(2px)',
+          }}
+        />
+
+        {/* Contenedor centrado para el contenido - SIN blur */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="flex flex-1 flex-col md:flex-row items-center justify-between gap-10 py-10">
             {/* Columna texto */}
@@ -71,7 +75,7 @@ export default function Hero() {
         </div>
 
         {/* Degradado inferior para efecto visual */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent z-[5]" />
       </div>
     </section>
   );
