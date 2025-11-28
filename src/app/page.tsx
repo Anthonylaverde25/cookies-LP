@@ -13,12 +13,18 @@ export default function Home() {
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
         <Header />
-        <div className="flex flex-1 justify-center pt-24 pb-8 sm:px-4 md:px-10 lg:px-20 xl:px-40">
+        
+        {/* Hero - Full viewport width */}
+        <div className="pt-16">
+          <div id="home">
+            <Hero />
+          </div>
+        </div>
+
+        {/* Contenido principal - Con contenedor */}
+        <div className="flex flex-1 justify-center pb-8 sm:px-4 md:px-10 lg:px-20 xl:px-40">
           <div className="layout-content-container flex flex-col max-w-7xl flex-1">
             <main>
-              <div id="home">
-                <Hero />
-              </div>
               <div id="products">
                 <ProductGrid />
               </div>
