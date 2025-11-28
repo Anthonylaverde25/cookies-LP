@@ -54,16 +54,16 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[420px] bg-white shadow-2xl z-[90] transition-transform duration-300 ease-out flex flex-col ${
+        className={`fixed top-0 right-0 h-full w-full md:w-[420px] bg-background-light shadow-2xl z-[90] transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-bold uppercase tracking-wide">MI COMPRA</h2>
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border-light">
+          <h2 className="text-lg font-bold uppercase tracking-wide nav-link">MI COMPRA</h2>
           <button
             onClick={onClose}
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-text-muted-light hover:text-text-light transition-colors"
           >
             <span className="material-symbols-outlined text-[24px]">close</span>
           </button>
@@ -73,21 +73,21 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         <div className="flex-1 overflow-y-auto">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
-              <div className="bg-gray-100 p-8 rounded-full">
-                <span className="material-symbols-outlined text-[64px] text-gray-400">
+              <div className="bg-primary/10 p-8 rounded-full">
+                <span className="material-symbols-outlined text-[64px] text-primary/60">
                   shopping_cart
                 </span>
               </div>
               <div>
-                <p className="text-xl font-bold text-gray-900 mb-2">Tu carrito está vacío</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-xl font-bold nav-link mb-2">Tu carrito está vacío</p>
+                <p className="text-sm text-text-muted-light">
                   Agregá productos deliciosos para comenzar
                 </p>
               </div>
               <Link
                 href="/#products"
                 onClick={onClose}
-                className="mt-4 px-8 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                className="mt-4 px-8 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-md"
               >
                 Ver productos
               </Link>
@@ -96,9 +96,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             <>
               {/* Banner promocional */}
               {total >= 3000 && (
-                <div className="bg-primary/10 px-5 py-3 text-center">
+                <div className="bg-primary/10 px-5 py-3 text-center border-b border-primary/20">
                   <p className="text-sm font-semibold text-primary">
-                    ¡Envío gratis en compras mayores a ${formatPrice(5000)}!
+                    ¡Envío gratis en compras mayores a {formatPrice(5000)}!
                   </p>
                 </div>
               )}
@@ -106,11 +106,11 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               {/* Items */}
               <div className="px-5 py-4 space-y-4">
                 {items.map((item) => (
-                  <div key={item.id} className="relative bg-gray-50 rounded-lg p-4">
+                  <div key={item.id} className="relative bg-white border border-border-light rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                     {/* Delete button */}
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition-colors"
+                      className="absolute top-3 right-3 text-text-muted-light hover:text-red-500 transition-colors"
                     >
                       <span className="material-symbols-outlined text-[20px]">delete</span>
                     </button>
@@ -123,7 +123,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                         className="flex-shrink-0"
                       >
                         <div
-                          className="w-20 h-20 rounded-md bg-cover bg-center"
+                          className="w-20 h-20 rounded-md bg-cover bg-center hover:scale-105 transition-transform"
                           style={{ backgroundImage: `url("${item.image}")` }}
                         />
                       </Link>
@@ -133,30 +133,30 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                         <Link
                           href={`/productos/${item.slug}`}
                           onClick={onClose}
-                          className="font-semibold text-sm text-gray-900 hover:text-primary line-clamp-2 mb-1"
+                          className="font-semibold text-sm nav-link hover:text-primary line-clamp-2 mb-1"
                         >
                           {item.name}
                         </Link>
-                        <p className="text-xs text-gray-500 mb-3">
+                        <p className="text-xs text-text-muted-light mb-3">
                           {item.category}
                         </p>
 
                         {/* Quantity and Price */}
                         <div className="flex items-center justify-between">
                           {/* Quantity controls */}
-                          <div className="flex items-center gap-3 bg-white rounded-full border border-gray-300 px-1 py-1">
+                          <div className="flex items-center gap-3 bg-background-light rounded-full border border-border-light px-1 py-1">
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
                             >
                               <span className="material-symbols-outlined text-[18px]">remove</span>
                             </button>
-                            <span className="text-sm font-semibold min-w-[20px] text-center">
+                            <span className="text-sm font-semibold nav-link min-w-[20px] text-center">
                               {item.quantity}
                             </span>
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
                             >
                               <span className="material-symbols-outlined text-[18px]">add</span>
                             </button>
@@ -164,10 +164,10 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                           {/* Price */}
                           <div className="text-right">
-                            <p className="text-base font-bold text-gray-900">
+                            <p className="text-base font-bold text-primary">
                               {formatPrice(item.price * item.quantity)}
                             </p>
-                            <p className="text-xs text-gray-400 line-through">
+                            <p className="text-xs text-text-muted-light line-through">
                               {formatPrice(item.price * item.quantity * 1.2)}
                             </p>
                           </div>
@@ -183,17 +183,17 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-gray-200 bg-white">
+          <div className="border-t border-border-light bg-background-light">
             {/* Shipping calculator */}
-            <div className="px-5 py-4 border-b border-gray-100">
+            <div className="px-5 py-4 border-b border-border-light">
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[20px] text-gray-600">
+                  <span className="material-symbols-outlined text-[20px] text-text-muted-light">
                     local_shipping
                   </span>
-                  <span className="text-gray-700">Envío</span>
+                  <span className="text-text-light">Envío</span>
                 </div>
-                <button className="text-gray-900 font-semibold flex items-center gap-1 hover:text-primary transition-colors">
+                <button className="nav-link font-semibold flex items-center gap-1 hover:text-primary transition-colors">
                   CALCULAR ENVÍO
                   <span className="material-symbols-outlined text-[16px]">chevron_right</span>
                 </button>
@@ -201,17 +201,17 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </div>
 
             {/* Ver detalle */}
-            <details className="px-5 py-3 border-b border-gray-100">
-              <summary className="text-sm text-gray-600 cursor-pointer hover:text-gray-900">
+            <details className="px-5 py-3 border-b border-border-light">
+              <summary className="text-sm text-text-muted-light cursor-pointer hover:text-text-light">
                 Ver detalle
               </summary>
               <div className="mt-3 space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-semibold">{formatPrice(total)}</span>
+                  <span className="text-text-muted-light">Subtotal</span>
+                  <span className="font-semibold nav-link">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Envío</span>
+                  <span className="text-text-muted-light">Envío</span>
                   <span className="font-semibold text-green-600">
                     {total >= 5000 ? 'Gratis' : formatPrice(500)}
                   </span>
@@ -222,8 +222,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             {/* Total */}
             <div className="px-5 py-4">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-base font-bold uppercase">TOTAL</span>
-                <span className="text-2xl font-bold">
+                <span className="text-base font-bold uppercase nav-link">TOTAL</span>
+                <span className="text-2xl font-bold text-primary">
                   {formatPrice(total + (total >= 5000 ? 0 : 500))}
                 </span>
               </div>
@@ -231,7 +231,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               {/* Finalizar compra button */}
               <button
                 onClick={handleWhatsAppOrder}
-                className="w-full bg-black text-white rounded-full h-14 font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 mb-3"
+                className="w-full bg-primary text-white rounded-full h-14 font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 mb-3 shadow-md"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -244,7 +244,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 <Link
                   href="/#products"
                   onClick={onClose}
-                  className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
+                  className="text-text-muted-light hover:text-text-light flex items-center gap-1"
                 >
                   <span className="material-symbols-outlined text-[16px]">chevron_left</span>
                   Seguir comprando
