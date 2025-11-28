@@ -1,8 +1,12 @@
+"use client";
+
 import { products } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { use } from "react";
 
 export async function generateStaticParams() {
   return products.map((product) => ({
@@ -10,9 +14,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProductoDetalle({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default function ProductoDetalle({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const product = products.find((p) => p.slug === slug);
+  const { addItem } = useCart();
 
   if (!product) {
     notFound();
@@ -111,7 +116,10 @@ export default async function ProductoDetalle({ params }: { params: Promise<{ sl
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                <button className="flex-1 flex items-center justify-center gap-2 rounded-xl h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors shadow-md">
+                <button 
+                  onClick={() => addItem(product)}
+                  className="flex-1 flex items-center justify-center gap-2 rounded-xl h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors shadow-md"
+                >
                   <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
                   Agregar al carrito
                 </button>

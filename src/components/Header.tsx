@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useCart } from "@/context/CartContext";
+import CartDrawer from "./CartDrawer";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [ isScrolled, setIsScrolled] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { itemCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,11 +74,34 @@ export default function Header() {
             Contacto
           </Link>
         </div>
-        <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
-          <span className="truncate">Comprar Ahora</span>
+        
+        {/* Cart button desktop */}
+        <button 
+          onClick={() => setIsCartOpen(true)}
+          className="relative flex items-center justify-center gap-2 rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+        >
+          <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
+          <span className="truncate">Carrito</span>
+          {itemCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-white text-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {itemCount}
+            </span>
+          )}
         </button>
       </div>
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center gap-2">
+        {/* Cart button mobile */}
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className="relative nav-link p-2"
+        >
+          <span className="material-symbols-outlined">shopping_cart</span>
+          {itemCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {itemCount}
+            </span>
+          )}
+        </button>
         <button
           className="nav-link"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -147,12 +174,26 @@ export default function Header() {
           <div className="h-px bg-border-light my-4"></div>
           
           {/* Botón CTA */}
-          <button className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md">
+          <button 
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsCartOpen(true);
+            }}
+            className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md"
+          >
             <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
-            <span className="truncate">Comprar Ahora</span>
+            <span className="truncate">Ver Carrito</span>
+            {itemCount > 0 && (
+              <span className="bg-white text-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ml-auto">
+                {itemCount}
+              </span>
+            )}
           </button>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 }
