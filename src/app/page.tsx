@@ -15,7 +15,7 @@ export default function Home() {
         <Header />
         
         {/* Hero - Full viewport width */}
-        <div className="pt-16" id="home">
+        <div id="home" className="scroll-mt-16">
           <div className="w-full">
             <Hero />
           </div>
