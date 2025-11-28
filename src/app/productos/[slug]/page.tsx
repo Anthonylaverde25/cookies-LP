@@ -8,12 +8,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { use } from "react";
 
-export async function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
-}
-
 export default function ProductoDetalle({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const product = products.find((p) => p.slug === slug);
