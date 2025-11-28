@@ -1,85 +1,12 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import {
-  contactFormSchema,
-  type ContactFormData,
-} from "@/lib/schemas/contact-form.schema";
+import { Controller } from "react-hook-form";
+import useFormContact from "@/hooks/useFormContact";
 
 export default function ContactForm() {
-  const [submitStatus, setSubmitStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  
-  const onSubmit = async (data: ContactFormData) => {
-  setSubmitStatus(null); // limpiamos estado previo
-
-  try {
-    // Armamos los datos como formulario
-    const formBody = new URLSearchParams();
-    formBody.append("name", data.name);
-    formBody.append("email", data.email);
-    formBody.append("message", data.message);
-
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbyYX9mseo0PbbkAG4Vs_g9K3V4s-UTx90FLuiAs_c-4LgbEEZIhdawP6iicaHllHrQs/exec",
-      {
-        method: "POST",
-        body: formBody,
-        // 👇 IMPORTANTE: NO pongas Content-Type, el navegador lo setea bien.
-        // headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      }
-    );
-
-    if (!response.ok) {
-      setSubmitStatus({
-        success: false,
-        message: "No se pudo enviar el formulario. Intenta nuevamente.",
-      });
-      return;
-    }
-
-    const result = await response.json().catch(() => null);
-
-    setSubmitStatus({
-      success: result?.ok ?? true,
-      message: result?.message || "Mensaje enviado correctamente.",
-    });
-
-    if (result?.ok ?? true) {
-      reset();
-    }
-  } catch (error) {
-    console.error(error);
-    setSubmitStatus({
-      success: false,
-      message:
-        "Hubo un error inesperado. Por favor, intenta de nuevo más tarde.",
-    });
-  }
-};
-
+  const { control, handleSubmit, errors, isSubmitting, onSubmit, submitStatus } = useFormContact();
 
   return (
-    // ⛔️ Antes: <Form ...>  ✅ Ahora: <form ...>
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-6"
