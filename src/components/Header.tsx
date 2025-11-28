@@ -82,53 +82,59 @@ export default function Header() {
           <span className="material-symbols-outlined">menu</span>
         </button>
       </div>
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-background-light/95 backdrop-blur-md border-b border-border-light shadow-xl md:hidden animate-in slide-in-from-top-2 duration-200">
-          <div className="px-6 py-6 flex flex-col gap-1">
-            <Link
-              className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
-              href="#home"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="material-symbols-outlined text-primary text-[20px]">home</span>
-              Inicio
-            </Link>
-            <Link
-              className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
-              href="#products"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="material-symbols-outlined text-primary text-[20px]">shopping_bag</span>
-              Productos
-            </Link>
-            <Link
-              className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
-              href="#about"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="material-symbols-outlined text-primary text-[20px]">info</span>
-              Sobre Nosotros
-            </Link>
-            <Link
-              className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
-              href="#contact"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="material-symbols-outlined text-primary text-[20px]">mail</span>
-              Contacto
-            </Link>
-            
-            {/* Separador */}
-            <div className="h-px bg-border-light my-2"></div>
-            
-            {/* Botón CTA destacado */}
-            <button className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md">
-              <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
-              <span className="truncate">Comprar Ahora</span>
-            </button>
-          </div>
+      
+      {/* Menú móvil con animación suave */}
+      <div 
+        className={`absolute top-full left-0 w-full bg-background-light/95 backdrop-blur-md border-b border-border-light shadow-xl md:hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen 
+            ? 'opacity-100 translate-y-0 pointer-events-auto' 
+            : 'opacity-0 -translate-y-2 pointer-events-none'
+        }`}
+      >
+        <div className="px-6 py-6 flex flex-col gap-1">
+          <Link
+            className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
+            href="#home"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span className="material-symbols-outlined text-primary text-[20px]">home</span>
+            Inicio
+          </Link>
+          <Link
+            className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
+            href="#products"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span className="material-symbols-outlined text-primary text-[20px]">shopping_bag</span>
+            Productos
+          </Link>
+          <Link
+            className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
+            href="#about"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span className="material-symbols-outlined text-primary text-[20px]">info</span>
+            Sobre Nosotros
+          </Link>
+          <Link
+            className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
+            href="#contact"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span className="material-symbols-outlined text-primary text-[20px]">mail</span>
+            Contacto
+          </Link>
+          
+          {/* Separador */}
+          <div className="h-px bg-border-light my-2"></div>
+          
+          {/* Botón CTA destacado */}
+          <button className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md">
+            <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
+            <span className="truncate">Comprar Ahora</span>
+          </button>
         </div>
-      )}
+      </div>
     </header>
   );
 }
