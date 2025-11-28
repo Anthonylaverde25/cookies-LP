@@ -2,7 +2,6 @@
 
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
-import Drawer from "@mui/material/Drawer";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -44,21 +43,21 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   };
 
   return (
-    <Drawer
-      anchor="right"
-      open={isOpen}
-      onClose={onClose}
-      sx={{
-        '& .MuiDrawer-paper': {
-          width: {
-            xs: '100%',
-            md: '420px',
-          },
-          backgroundColor: '#f8f7f6',
-        },
-      }}
-    >
-      <div className="h-full flex flex-col bg-background-light">
+    <>
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[80] transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+      />
+
+      {/* Drawer */}
+      <div
+        className={`fixed top-0 right-0 h-full w-full md:w-[420px] bg-background-light shadow-2xl z-[90] transition-transform duration-300 ease-out flex flex-col ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border-light">
           <h2 className="text-lg font-bold uppercase tracking-wide nav-link">MI COMPRA</h2>
@@ -261,6 +260,6 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </div>
         )}
       </div>
-    </Drawer>
+    </>
   );
 }
