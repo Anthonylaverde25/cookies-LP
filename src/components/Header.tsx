@@ -26,7 +26,7 @@ export default function Header() {
         isScrolled
           ? "border-border-light/50 bg-background-light/80 backdrop-blur-md shadow-sm"
           : "border-transparent bg-transparent"
-      }`}
+      } ${isMenuOpen ? "border-transparent" : ""}`}
     >
       <div className="flex items-center gap-4">
         <div className="size-6 text-primary">
