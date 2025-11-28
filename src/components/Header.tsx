@@ -9,9 +9,13 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      // Aplicar estilo scrolled cuando está en top absoluto O cuando ha scrolleado
+      setIsScrolled(window.scrollY === 0 || window.scrollY > 10);
     };
 
+    // Establecer estado inicial
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
