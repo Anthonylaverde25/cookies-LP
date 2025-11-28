@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { products } from "@/data/products";
+import { Box, Button } from "@mui/material";
 
 export default function ProductGrid() {
   return (
-    <>
+    <Box>
       <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-8">
         Nuestros Horneados Más Amados
       </h2>
@@ -32,6 +33,9 @@ export default function ProductGrid() {
           </Link>
         ))}
       </div>
-    </>
+      <Box className="flex p-2 md:p-4 justify-end">
+        <Button className="w-full md:w-auto" variant="contained">Ir a la tienda</Button>
+      </Box>
+    </Box>
   );
 }

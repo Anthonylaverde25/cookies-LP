@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
 import { Toaster } from "sonner";
 import { CartProvider } from "@/context/CartContext";
+import ThemeRegistry from "@/components/ThemeRegistry";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "../styles/globals.scss";
 
 const epilogue = Epilogue({
@@ -29,10 +32,14 @@ export default function RootLayout({
         />
       </head>
       <body className={`${epilogue.variable} font-display antialiased bg-background-light text-text-light`}>
-        <CartProvider>
-          {children}
-          <Toaster position="top-right" richColors />
-        </CartProvider>
+        <ThemeRegistry>
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+            <Toaster position="top-right" richColors />
+          </CartProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );

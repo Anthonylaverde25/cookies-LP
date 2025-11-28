@@ -5,17 +5,6 @@ import Link from "next/link";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// Theme personalizado con los colores de la marca
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#ec6d13',
-      contrastText: '#fff',
-    },
-  },
-});
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -57,21 +46,20 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Drawer
-        anchor="right"
-        open={isOpen}
-        onClose={onClose}
-        sx={{
-          '& .MuiDrawer-paper': {
-            width: {
-              xs: '100%',
-              md: '420px',
-            },
-            backgroundColor: '#f8f7f6',
+    <Drawer
+      anchor="right"
+      open={isOpen}
+      onClose={onClose}
+      sx={{
+        '& .MuiDrawer-paper': {
+          width: {
+            xs: '100%',
+            md: '420px',
           },
-        }}
-      >
+          backgroundColor: '#f8f7f6',
+        },
+      }}
+    >
       <div className="h-full flex flex-col bg-background-light">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border-light">
@@ -264,7 +252,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
               {/* Finalizar compra button */}
               <Button
-                onClick={handleWhatsAppOrder}
+                component={Link}
+                href="/checkout"
+                onClick={onClose}
                 variant="contained"
                 fullWidth
                 startIcon={
@@ -333,6 +323,5 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         )}
       </div>
     </Drawer>
-    </ThemeProvider>
   );
 }

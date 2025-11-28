@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "./CartDrawer";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,38 +79,46 @@ export default function Header() {
         </div>
         
         {/* Cart button desktop */}
-        <button 
+        <Button
           onClick={() => setIsCartOpen(true)}
-          className="relative flex items-center justify-center gap-2 rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+          variant="contained"
+          startIcon={<span className="material-symbols-outlined text-[20px]">shopping_cart</span>}
+          sx={{
+            borderRadius: '12px',
+            height: 40,
+            padding: '0 16px',
+            fontSize: '14px',
+            fontWeight: 700,
+            textTransform: 'none',
+            boxShadow: 'none',
+            '&:hover': {
+              boxShadow: 'none',
+              backgroundColor: 'rgba(236, 109, 19, 0.9)',
+            }
+          }}
         >
-          <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
-          <span className="truncate">Carrito</span>
-          {itemCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-white text-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              {itemCount}
-            </span>
-          )}
-        </button>
+          <span className="truncate mr-1">Carrito</span>
+          <Badge badgeContent={itemCount} color="error" sx={{ '& .MuiBadge-badge': { right: -3, top: 3 } }}>
+            <span />
+          </Badge>
+        </Button>
       </div>
-      <div className="md:hidden flex items-center gap-2">
+      <div className="md:hidden flex items-center gap-1">
         {/* Cart button mobile */}
-        <button
+        <IconButton
           onClick={() => setIsCartOpen(true)}
-          className="relative nav-link p-2"
+          sx={{ color: '#1c1917' }}
         >
-          <span className="material-symbols-outlined">shopping_cart</span>
-          {itemCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              {itemCount}
-            </span>
-          )}
-        </button>
-        <button
-          className="nav-link"
+          <Badge badgeContent={itemCount} color="primary">
+            <span className="material-symbols-outlined">shopping_cart</span>
+          </Badge>
+        </IconButton>
+        <IconButton
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          sx={{ color: '#1c1917' }}
         >
           <span className="material-symbols-outlined">menu</span>
-        </button>
+        </IconButton>
       </div>
       
       {/* Overlay - Fondo oscuro */}
@@ -127,12 +138,12 @@ export default function Header() {
         {/* Header del drawer */}
         <div className="flex items-center justify-between p-6 border-b border-border-light">
           <h3 className="text-lg font-bold nav-link">Menú</h3>
-          <button 
+          <IconButton 
             onClick={() => setIsMenuOpen(false)}
-            className="nav-link hover:bg-primary/10 p-2 rounded-lg transition-colors"
+            sx={{ color: '#78716c' }}
           >
             <span className="material-symbols-outlined">close</span>
-          </button>
+          </IconButton>
         </div>
 
         {/* Contenido del drawer */}
@@ -174,21 +185,27 @@ export default function Header() {
           <div className="h-px bg-border-light my-4"></div>
           
           {/* Botón CTA */}
-          <button 
+          <Button
             onClick={() => {
               setIsMenuOpen(false);
               setIsCartOpen(true);
             }}
-            className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md"
+            variant="contained"
+            fullWidth
+            startIcon={<span className="material-symbols-outlined text-[20px]">shopping_cart</span>}
+            sx={{
+              borderRadius: '12px',
+              height: 48,
+              fontSize: '16px',
+              fontWeight: 700,
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+            }}
           >
-            <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
-            <span className="truncate">Ver Carrito</span>
-            {itemCount > 0 && (
-              <span className="bg-white text-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ml-auto">
-                {itemCount}
-              </span>
-            )}
-          </button>
+            <span className="truncate mr-1">Ver Carrito</span>
+            <Badge badgeContent={itemCount} color="error" sx={{ '& .MuiBadge-badge': { right: -3, top: 3 } }}>
+              <span />
+            </Badge>
+          </Button>
         </div>
       </div>
 

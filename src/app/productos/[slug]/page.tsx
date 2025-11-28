@@ -2,11 +2,10 @@
 
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { use } from "react";
+import Button from "@mui/material/Button";
 
 export default function ProductoDetalle({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -19,18 +18,29 @@ export default function ProductoDetalle({ params }: { params: Promise<{ slug: st
 
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light">
-      <Header />
       
       <main className="flex-1 pt-20 pb-12">
         {/* Back button */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6">
-          <Link 
+          <Button
+            component={Link}
             href="/#products"
-            className="inline-flex items-center gap-2 nav-link text-sm hover:gap-3 transition-all"
+            variant="text"
+            startIcon={<span className="material-symbols-outlined text-[20px]">arrow_back</span>}
+            sx={{
+              color: '#1c1917',
+              textTransform: 'none',
+              fontSize: '14px',
+              fontWeight: 500,
+              '&:hover': {
+                backgroundColor: 'transparent',
+                gap: '12px'
+              },
+              transition: 'gap 0.2s'
+            }}
           >
-            <span className="material-symbols-outlined text-[20px]">arrow_back</span>
             Volver a productos
-          </Link>
+          </Button>
         </div>
 
         {/* Product detail */}
@@ -109,21 +119,48 @@ export default function ProductoDetalle({ params }: { params: Promise<{ slug: st
               )}
 
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                <button 
+              <div className="flex flex-row gap-3 pt-4">
+                <Button
                   onClick={() => addItem(product)}
-                  className="flex-1 flex items-center justify-center gap-2 rounded-xl h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors shadow-md"
+                  variant="contained"
+                  startIcon={<span className="material-symbols-outlined text-[20px]">shopping_cart</span>}
+                  sx={{
+                    flex: '1 1 auto', // Allow it to grow and shrink
+                    height: 48,
+                    borderRadius: '12px',
+                    fontSize: { xs: '14px', md: '16px' },
+                    fontWeight: 700,
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                    '&:hover': {
+                      boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                    },
+                    whiteSpace: 'nowrap'
+                  }}
                 >
-                  <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
                   Agregar al carrito
-                </button>
-                <Link
+                </Button>
+                <Button
+                  component={Link}
                   href="/#contact"
-                  className="flex items-center justify-center gap-2 rounded-xl h-12 px-6 border-2 border-primary text-primary text-base font-bold hover:bg-primary/5 transition-colors"
+                  variant="outlined"
+                  sx={{
+                    flex: '0 0 auto', // Don't grow too much, keep it compact
+                    height: 48,
+                    borderRadius: '12px',
+                    fontSize: { xs: '14px', md: '16px' },
+                    fontWeight: 700,
+                    padding: '0 16px',
+                    borderWidth: '2px',
+                    '&:hover': {
+                      borderWidth: '2px',
+                      backgroundColor: 'rgba(236, 109, 19, 0.05)'
+                    },
+                    minWidth: 'fit-content'
+                  }}
                 >
-                  <span className="material-symbols-outlined text-[20px]">mail</span>
+                  <span className="material-symbols-outlined text-[20px] mr-2">mail</span>
                   Consultar
-                </Link>
+                </Button>
               </div>
 
               {/* Extra info */}
@@ -147,8 +184,6 @@ export default function ProductoDetalle({ params }: { params: Promise<{ slug: st
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { Controller } from "react-hook-form";
 import useFormContact from "@/hooks/useFormContact";
+import Button from "@mui/material/Button";
 
 export default function ContactForm() {
   const { control, handleSubmit, errors, isSubmitting, onSubmit } = useFormContact();
@@ -104,15 +105,31 @@ export default function ContactForm() {
 
 
       {/* Botón de envío */}
-      <button
+      {/* Botón de envío */}
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] w-full hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        variant="contained"
+        fullWidth
+        size="large"
+        sx={{
+          height: 48,
+          borderRadius: '12px',
+          fontSize: '16px',
+          fontWeight: 700,
+          letterSpacing: '0.015em',
+          maxWidth: '480px',
+          alignSelf: 'center', // To center it if it's not full width in larger screens, matching previous max-w-[480px] logic if needed, but flex col gap 6 makes it stretch. Previous had w-full.
+          '&:disabled': {
+            opacity: 0.5,
+            cursor: 'not-allowed',
+            backgroundColor: 'rgba(236, 109, 19, 0.5)', // Keep it orange-ish but faded
+            color: '#fff'
+          }
+        }}
       >
-        <span className="truncate">
-          {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
-        </span>
-      </button>
+        {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+      </Button>
     </form>
   );
 }

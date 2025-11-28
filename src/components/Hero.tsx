@@ -1,3 +1,8 @@
+"use client";
+
+import Link from "next/link";
+import Button from "@mui/material/Button";
+
 export default function Hero() {
   return (
     <section className="w-full py-10 md:py-16">
@@ -51,12 +56,51 @@ export default function Hero() {
 
               {/* Botones */}
               <div className="mt-5 flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-                <button className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl h-12 px-6 bg-primary text-white text-sm md:text-base font-semibold tracking-[0.02em] shadow-md hover:brightness-110 hover:-translate-y-[1px] transition-all">
+                <Button
+                  component={Link}
+                  href="/#products"
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    borderRadius: '12px',
+                    height: 48,
+                    padding: '0 24px',
+                    fontSize: { xs: '14px', md: '16px' },
+                    fontWeight: 600,
+                    letterSpacing: '0.02em',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                    '&:hover': {
+                      filter: 'brightness(1.1)',
+                      transform: 'translateY(-1px)',
+                      boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                    },
+                    transition: 'all 0.2s'
+                  }}
+                >
                   Explorar catálogo
-                </button>
-                <button className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl h-12 px-6 border border-white/40 bg-black/25 text-white text-sm md:text-base font-medium hover:bg-white/10 transition-all">
+                </Button>
+                <Button
+                  component={Link}
+                  href="/#menu"
+                  variant="outlined"
+                  size="large"
+                  sx={{
+                    borderRadius: '12px',
+                    height: 48,
+                    padding: '0 24px',
+                    fontSize: { xs: '14px', md: '16px' },
+                    fontWeight: 500,
+                    color: '#fff',
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      borderColor: 'rgba(255, 255, 255, 0.6)',
+                    }
+                  }}
+                >
                   Ver menú del día
-                </button>
+                </Button>
               </div>
 
               {/* Métrica social / confianza */}
