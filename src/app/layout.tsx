@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
+import { Toaster } from "sonner";
 import "../styles/globals.scss";
 
 const epilogue = Epilogue({
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body className={`${epilogue.variable} font-display antialiased bg-background-light text-text-light`}>
         {children}
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

@@ -2,13 +2,9 @@ import { ContactFormData, contactFormSchema } from "@/lib/schemas/contact-form.s
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function useFormContact() {
-  const [submitStatus, setSubmitStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
-
   const {
     control,
     handleSubmit,
@@ -24,7 +20,7 @@ export default function useFormContact() {
   });
 
   const onSubmit = async (formData: ContactFormData) => {
-    setSubmitStatus(null); // Limpiamos estado previo
+    const loadingToast = toast.loading("Enviando mensaje...");
 
     try {
       // Armamos los datos como formulario
@@ -36,7 +32,11 @@ export default function useFormContact() {
       const contactFormUrl = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
 
       if (!contactFormUrl) {
-        throw new Error("La URL del formulario de contacto no está configurada");
+        toast.error("Error de configuración", {
+          description: "La URL del formulario no está configurada",
+          id: loadingToast,
+        });
+        return;
       }
 
       const response = await fetch(contactFormUrl, {
@@ -45,28 +45,32 @@ export default function useFormContact() {
       });
 
       if (!response.ok) {
-        setSubmitStatus({
-          success: false,
-          message: "No se pudo enviar el formulario. Intenta nuevamente.",
+        toast.error("Error al enviar", {
+          description: "No se pudo enviar el formulario. Intenta nuevamente.",
+          id: loadingToast,
         });
         return;
       }
 
       const result = await response.json().catch(() => null);
 
-      setSubmitStatus({
-        success: result?.ok ?? true,
-        message: result?.message || "Mensaje enviado correctamente.",
-      });
-
       if (result?.ok ?? true) {
+        toast.success("¡Mensaje enviado!", {
+          description: result?.message || "Gracias por contactarnos. Te responderemos pronto.",
+          id: loadingToast,
+        });
         reset();
+      } else {
+        toast.error("Error", {
+          description: result?.message || "Hubo un problema al enviar tu mensaje.",
+          id: loadingToast,
+        });
       }
     } catch (error) {
       console.error(error);
-      setSubmitStatus({
-        success: false,
-        message: "Hubo un error inesperado. Por favor, intenta de nuevo más tarde.",
+      toast.error("Error inesperado", {
+        description: "Por favor, intenta de nuevo más tarde.",
+        id: loadingToast,
       });
     }
   };
@@ -77,6 +81,5 @@ export default function useFormContact() {
     errors,
     isSubmitting,
     onSubmit,
-    submitStatus,
   };
 }
