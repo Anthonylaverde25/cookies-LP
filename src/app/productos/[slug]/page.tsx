@@ -10,8 +10,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProductoDetalle({ params }: { params: { slug: string } }) {
-  const product = products.find((p) => p.slug === params.slug);
+export default async function ProductoDetalle({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find((p) => p.slug === slug);
 
   if (!product) {
     notFound();
