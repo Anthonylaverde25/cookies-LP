@@ -26,7 +26,7 @@ export default function Header() {
         isScrolled
           ? "border-border-light/50 bg-background-light/80 backdrop-blur-md shadow-sm"
           : "border-transparent bg-transparent"
-      } ${isMenuOpen ? "border-transparent" : ""}`}
+      }`}
     >
       <div className="flex items-center gap-4">
         <div className="size-6 text-primary">
@@ -83,15 +83,33 @@ export default function Header() {
         </button>
       </div>
       
-      {/* Menú móvil con animación suave */}
+      {/* Overlay - Fondo oscuro */}
       <div 
-        className={`absolute top-full left-0 w-full bg-background-light/95 backdrop-blur-md border-b border-border-light shadow-xl md:hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen 
-            ? 'opacity-100 translate-y-0 pointer-events-auto' 
-            : 'opacity-0 -translate-y-2 pointer-events-none'
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] md:hidden transition-opacity duration-300 ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Drawer lateral */}
+      <div 
+        className={`fixed top-0 right-0 h-full w-[280px] bg-background-light shadow-2xl z-[70] md:hidden transition-transform duration-300 ease-out ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="px-6 py-6 flex flex-col gap-1">
+        {/* Header del drawer */}
+        <div className="flex items-center justify-between p-6 border-b border-border-light">
+          <h3 className="text-lg font-bold nav-link">Menú</h3>
+          <button 
+            onClick={() => setIsMenuOpen(false)}
+            className="nav-link hover:bg-primary/10 p-2 rounded-lg transition-colors"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        {/* Contenido del drawer */}
+        <div className="px-4 py-6 flex flex-col gap-1 overflow-y-auto h-[calc(100%-80px)]">
           <Link
             className="text-base font-medium leading-relaxed nav-link transition-all py-3 px-4 rounded-lg hover:bg-primary/10 flex items-center gap-3"
             href="#home"
@@ -126,10 +144,10 @@ export default function Header() {
           </Link>
           
           {/* Separador */}
-          <div className="h-px bg-border-light my-2"></div>
+          <div className="h-px bg-border-light my-4"></div>
           
-          {/* Botón CTA destacado */}
-          <button className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md">
+          {/* Botón CTA */}
+          <button className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-all shadow-md">
             <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
             <span className="truncate">Comprar Ahora</span>
           </button>
