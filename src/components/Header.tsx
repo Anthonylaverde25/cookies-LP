@@ -29,7 +29,7 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center gap-4">
-        <div className={`size-6 ${isScrolled ? "text-primary" : "text-white"}`}>
+        <div className="size-6 text-primary">
           <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path
               clipRule="evenodd"
@@ -39,32 +39,36 @@ export default function Header() {
             ></path>
           </svg>
         </div>
-        <h2 className={`text-lg font-bold leading-tight tracking-[-0.015em] ${isScrolled ? "text-text-light" : "text-white"}`}>
+        <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]" style={{ color: '#1b1b1b' }}>
           Artisan Bakes
         </h2>
       </div>
       <div className="hidden md:flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
           <Link
-            className={`text-sm font-medium leading-normal hover:text-primary transition-colors ${isScrolled ? "text-text-light" : "text-white"}`}
+            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
+            style={{ color: '#1b1b1b' }}
             href="#home"
           >
             Inicio
           </Link>
           <Link
-            className={`text-sm font-medium leading-normal hover:text-primary transition-colors ${isScrolled ? "text-text-light" : "text-white"}`}
+            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
+            style={{ color: '#1b1b1b' }}
             href="#products"
           >
             Productos
           </Link>
           <Link
-            className={`text-sm font-medium leading-normal hover:text-primary transition-colors ${isScrolled ? "text-text-light" : "text-white"}`}
+            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
+            style={{ color: '#1b1b1b' }}
             href="#about"
           >
             Sobre Nosotros
           </Link>
           <Link
-            className={`text-sm font-medium leading-normal hover:text-primary transition-colors ${isScrolled ? "text-text-light" : "text-white"}`}
+            className="text-sm font-medium leading-normal hover:text-primary transition-colors"
+            style={{ color: '#1b1b1b' }}
             href="#contact"
           >
             Contacto
@@ -76,7 +80,7 @@ export default function Header() {
       </div>
       <div className="md:hidden">
         <button
-          className={isScrolled ? "text-text-light" : "text-white"}
+          style={{ color: '#1b1b1b' }}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <span className="material-symbols-outlined">menu</span>
