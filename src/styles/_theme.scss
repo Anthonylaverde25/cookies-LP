@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+@mixin apply {
+    @theme {
+        --color-primary: #{$primary};
+        --color-background-light: #{$background-light};
+        --color-background-dark: #{$background-dark};
+        --color-text-light: #{$text-light};
+        --color-text-dark: #{$text-dark};
+        --color-text-muted-light: #{$text-muted-light};
+        --color-text-muted-dark: #{$text-muted-dark};
+        --color-border-light: #{$border-light};
+        --color-border-dark: #{$border-dark};
+
+        --font-display: #{$font-display};
+    }
+}
